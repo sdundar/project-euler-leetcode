@@ -1,0 +1,26 @@
+function* fib() { //  bir asenkron işlevi gibi çalışan generator işlevidir
+    let last = BigInt(1); 
+    let current = BigInt(1);
+
+    yield last;//buraya döner  ve daha sonra alır son kez bırakmıştı, böylece ilk kez geri döner.
+    yield current;
+
+    while (true) {
+        current += last;
+        last = current - last;
+        yield current; // burada birinin sonunu döndürecek ve her çalıştırdığınızda
+        // current ve  while döngüsü daha sonra her zaman son zamandaki ile başlar.
+    }
+}
+
+function nDigitFib() { // fonksiyonu tanımlama
+    let i = 1; //her zaman güncel bir sayı alıyoruz 
+    for(const n of fib()) { // n 'nin sabit fib fonksiyonu olduğu tanımı yapılmış.
+        if(n.toString().length === 1000) { // 1000 basamak içeren Fibonacci dizisindeki terimi soruyor 
+            console.log(i);// sonuç 
+            break; //bitir , 
+        }
+        i++;
+    }
+}
+nDigitFib(); //İşlevi çalıştırma komutu

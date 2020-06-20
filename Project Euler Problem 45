@@ -1,0 +1,16 @@
+var out = require("./timer"); //require gerekli 
+var numbers = require("./numbers"); // gerektirir.
+
+var i=numbers.isTriangle(40755) + 1; // 40755 ten bir sonraki üçgen numarası 
+
+function test(n) {
+    return numbers.isTriangle(n) && //üçgen 
+        numbers.isPentagonal(n) && // beşgen
+        numbers.isHexagonal(n); // altıgen
+}
+
+while (!test(numbers.nTriangle(i))){ 
+    i++; // 1 artır.
+}
+
+out.print(numbers.nTriangle(i)); // dışarı yazdır üçgenin numarasını.

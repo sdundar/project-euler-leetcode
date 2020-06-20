@@ -1,0 +1,41 @@
+/**
+ * @param {number[]} nums
+ * @return {number[]}
+ */
+var countSmaller = function(nums) {
+    var n = nums.length; // o dizideki öğelerin sayısını ayarlar veya döndürür
+    if(n<1) { //  eğer 1 küçükten küçükse
+        return []; //  değeri boş döndürür. 
+    }
+    var res  = new Array(n).fill(0); //Her bir öğe ile başlayan sonuç dizisini sıfırlar
+    var Node = function(val, sum) {
+        this.val = val; // biribirlerine eşit olurlar
+        this.sum = sum; // biribirlerine eşit olurlar
+        this.dup = 1; //  ikisi de bir kazanır.
+    };
+    var insert = function(val, node, i, preSum) { //insert fonsiyonumuzu yazalım böylece //ekleme 
+       // fonksiyonu değer alabilir ve node , i ve prizma varsa argümanları için 
+        // değereler ekleyebilir.*/
+        if(!node) { // eğer not değilse yeni bir düğüm  ekleyecektir.
+            node = new Node(val, 0); // düğüm yeni düğüme eşittir.
+            res[i] = preSum; 
+        } else if(node.val == val) { // tüm düğümler şu anki sayıdan daha küçüktür .
+            // bu yüzden düğüm değerine eşit olduğndan başka bir koşul kullanacaz. bir else if //daha
+            node.dup++;
+            res[i] = node.sum + preSum;
+        } else if(val < node.val) {
+            node.sum++; // toplamı artı artı 
+            node.left = insert(val, node.left, i, preSum);//sol kısma değer ekleceğiz.
+        } else{ 
+            node.right = insert(val, node.right, i, preSum+node.dup+node.sum)
+        }
+        return node; //düğümü geri döndürüyoruz,
+        // her adım sonunda  değer geri dönecek .
+    };
+    var root = null; //  burada kökten geçiyoruz ve düğümü geri döndürüyoruz,  
+    for(var i=n-1; i>=0; i--){ // 
+        root = insert(nums[i], root, i, 0); // sağ taraftan başladığımız tekrarlayan 
+        //ekleme fonsiyonunu tamamladık.
+    }
+    return res; // ve geri döndürür.
+};

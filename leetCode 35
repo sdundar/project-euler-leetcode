@@ -1,0 +1,22 @@
+/**
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number}
+ */
+//space (1)
+var searchInsert = function(nums, target) {
+    let i = 0 // i yi o a eşitle
+    let j = nums.length
+    while (i <= j) { //i jden küçük eşit olduğu sürece 
+        const middle = Math.floor((i + j) / 2)
+        if(nums[middle] === target) {
+            return middle  //eğer orta hedef bu hareket ettiğimizden daha fazla ise diğer durum 
+        } else if (nums[middle] < target) {
+              i += 1              // i yi artır 
+        } else{
+              j -= 1 // j yi azalt
+        } 
+    }
+    return i // sonunda geri döndür.
+    
+};

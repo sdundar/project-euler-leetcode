@@ -1,0 +1,16 @@
+const smallestMult = function(n) {
+    const mults =[]; // yeni bir sabit dizi oluşturalım 
+    for ( let i = 1; i <=n; i++) {  // i yi birden başlat ne kadar birer birer artır.
+        // 1'den 20' ye kadar  birer birer artacak.  Tüm sayılar için yenilenir.
+        let newMult = i; 
+        mults.forEach(function(mult){  
+            if(newMult % mult == 0) { //  eğer bölümünden kalanı 0 eşit ise 
+                newMult /= mult ; // 
+            }
+        })
+        mults.push(newMult); // newMult a göndermeye zorladık.
+    }
+    return mults.reduce((product = 1, mult) => product <= mult);//ve ürünün 1'e eşit olduğunu söyleriz.
+    
+}
+console.log(smallestMult(20)) 

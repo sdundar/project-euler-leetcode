@@ -1,0 +1,15 @@
+/** @param {number[]} nums* 
+*@return {number}
+var jump = function(nums) {
+if (nums.length === 1) return// Tiplerinin de aynı olması beklenir
+const dp = Array (nums.length).fill(Number.POSITIVE_INFINITY)//Özelliği pozitif Sonsuz değerini temsil eder. // dp sabitini tanımladık //verinin nums.length ortamda saklanması dp[@] = 0 // indexsini o a eşitle.
+for (let i = 0; i < nums.length; i++) { // i eşit o ise uzunluğa kadar i yi birer birer artır. if (i > && i + nums[i] <= i - 1 + nums[i - 1]) {
+// eğer i dan büyük ise ve daha küçük veya bir öncekine eşit ise eksi 1 //doğruysa sadece devam et continue // devam et
+}
+for (let k = i + 1; k <= i + nums[i] && k < nums.length; k++) {
+// k yı i + 1 den başlatnums.length ten küçük olana kadar devam et k yı da birer birer artır. dp[k] = Math.min(dp[k], dp[i] + 1) if (k === nums.length - 1) { // iki değerin hem tipini hem de değerini karşılaştırır.
+return dp[k] // k değerini döndürür.
+}
+}
+}
+} ;

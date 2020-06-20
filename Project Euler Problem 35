@@ -1,0 +1,37 @@
+var out = require("./timer"); 
+var optimus = require("./optimus"); // sabitleri tanımladık 
+var numbers = require("./numbers"); // require gerekli olan 
+
+function permutable_prime(test_num) {
+    var num = test_num.toString().split(""); //parçala
+
+    var check,perm = numbers.firstPermutation(num);
+    console.log(perm.join(""));
+    if (!optimus.isPrime(perm.join("")/1)) return false;// geri dönüş yanlış .
+    while ((check=numbers.lexiPermutation(perm)) != perm) {
+        if (!optimus.isPrime(check.join("")/1)) {return false;} // numarayı döndürün.
+        perm=check; // kontrol edin.
+    }
+    return true;// doğru değeri döndür.
+}
+function circular_prime(test_num) {
+    var num = test_num.toString().split("");  //parçala
+    if (!optimus.isPrime(num.join("")/1)) return false; 
+    for (var i in num) {
+        num.unshift(num.pop());
+        if (!optimus.isPrime(num.join("")/1)) return false;
+    }
+    return true; // doğru değeri döndür.
+}
+
+var prime=1;
+var count = 0; // sayısı 0 olsun.
+var max = 1000000; //en fazla  1 milyon olabilir.
+
+while (optimus.getPrime(prime)<max) { // bir milyonun altında kaç tane dairesel primer var ?
+    if (circular_prime(optimus.getPrime(prime))){
+        count++; // sayımı  artır.
+    }
+    prime++; // prime 1 artır. 
+}
+out.print(count); //sayımı dışarı yazdır 
